@@ -20,7 +20,15 @@ from maze_generator.algorithms.generators import (
     PrimGenerator,
 )
 from maze_generator.algorithms.solvers import AStarSolver
-from maze_generator.visualization import ImageExporter
+
+# Optional import for visualization
+try:
+    from maze_generator.visualization import ImageExporter
+    HAS_IMAGE_EXPORT = True
+except ImportError as e:
+    print(f"Warning: ImageExporter not available: {e}")
+    ImageExporter = None
+    HAS_IMAGE_EXPORT = False
 
 
 class AnimatedMazeDemo:
@@ -281,7 +289,12 @@ def main():
     """Create all animated demonstrations."""
     print("🎬 Creating Animated Demonstrations")
     print("=" * 50)
-    
+
+    if not HAS_IMAGE_EXPORT:
+        print("❌ ImageExporter not available. Cannot create animations.")
+        print("Install required dependencies: pip install matplotlib pillow")
+        return 1
+
     output_dir = Path("demo/animations")
     demo = AnimatedMazeDemo(output_dir)
     
