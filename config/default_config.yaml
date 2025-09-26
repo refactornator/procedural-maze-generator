@@ -1,0 +1,132 @@
+# Default configuration for Procedural Maze Generator
+# Copy this file to ~/.maze_generator/config.yaml to customize settings
+
+# Visualization settings
+visualization:
+  # Size of each cell in pixels
+  cell_size: 20
+  
+  # Width of walls in pixels
+  wall_width: 2
+  
+  # Color scheme (hex colors)
+  colors:
+    wall: '#000000'        # Black walls
+    path: '#FFFFFF'        # White paths
+    start: '#00FF00'       # Green start position
+    end: '#FF0000'         # Red end position
+    solution: '#0000FF'    # Blue solution path
+    visited: '#FFFF00'     # Yellow visited cells
+    current: '#FFA500'     # Orange current cell (during generation/solving)
+    frontier: '#800080'    # Purple frontier cells
+    background: '#F0F0F0'  # Light gray background
+
+# Maze generation settings
+generation:
+  # Default algorithm for maze generation
+  # Options: dfs, kruskal, prim, wilson
+  default_algorithm: 'dfs'
+  
+  # Default maze dimensions
+  default_width: 20
+  default_height: 20
+  
+  # Random seed (null for random)
+  default_seed: null
+  
+  # Animation delay in milliseconds for step-by-step visualization
+  animation_delay_ms: 50
+
+# Maze solving settings
+solving:
+  # Default algorithm for maze solving
+  # Options: astar, dijkstra, bfs, dfs, wall-follower
+  default_algorithm: 'astar'
+  
+  # Animation delay in milliseconds for step-by-step visualization
+  animation_delay_ms: 100
+  
+  # Show visited cells during solving
+  show_visited: true
+  
+  # Show solution path
+  show_path: true
+
+# Export settings
+export:
+  # Default export format
+  # Options: png, jpg, svg, ascii
+  default_format: 'png'
+
+  # Default DPI for image exports
+  default_dpi: 300
+
+  # JPEG quality (0-100)
+  jpeg_quality: 95
+
+  # Add border around exported images
+  add_border: true
+
+  # Add title to exported images
+  add_title: true
+
+  # Output directory settings
+  output_directory: 'output'
+
+  # Organize output files by algorithm in subdirectories
+  organize_by_algorithm: false
+
+  # Organize output files by date in subdirectories
+  organize_by_date: false
+
+  # Automatically create output directories if they don't exist
+  auto_create_directories: true
+
+  # Use timestamped filenames (YYYYMMDD_HHMMSS format)
+  use_timestamped_filenames: false
+
+  # Automatically clean up temporary files
+  cleanup_temp_files: true
+
+  # Maximum age of temporary files in hours before cleanup
+  temp_file_max_age_hours: 24
+
+# Performance settings
+performance:
+  # Maximum maze size for interactive visualization
+  max_interactive_size: 50
+  
+  # Enable performance profiling
+  enable_profiling: false
+  
+  # Memory usage warnings
+  warn_large_mazes: true
+  large_maze_threshold: 10000  # cells (width * height)
+
+# CLI settings
+cli:
+  # Default verbosity level (0=quiet, 1=normal, 2=verbose)
+  verbosity: 1
+  
+  # Show progress bars for long operations
+  show_progress: true
+  
+  # Confirm before overwriting files
+  confirm_overwrite: true
+
+# Advanced settings
+advanced:
+  # Use multiprocessing for batch operations
+  use_multiprocessing: false
+  
+  # Number of worker processes (null for auto-detect)
+  worker_processes: null
+  
+  # Cache generated mazes
+  enable_caching: false
+  
+  # Cache directory
+  cache_directory: '~/.maze_generator/cache'
+  
+  # Maximum cache size in MB
+  max_cache_size: 100
