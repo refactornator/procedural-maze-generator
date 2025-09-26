@@ -145,6 +145,30 @@ Examples:
         benchmark_parser.add_argument('--iterations', '-i', type=int, default=10,
                                      help='Number of iterations (default: 10)')
         benchmark_parser.add_argument('--seed', '-s', type=int, help='Random seed for reproducible results')
+
+        # Output management command
+        output_parser = subparsers.add_parser('output', help='Manage output directories')
+        output_subparsers = output_parser.add_subparsers(dest='output_command', help='Output management commands')
+
+        # Initialize output directory
+        init_parser = output_subparsers.add_parser('init', help='Initialize output directory structure')
+        init_parser.add_argument('--directory', '-d', help='Output directory path (default: output)')
+
+        # List output files
+        list_parser = output_subparsers.add_parser('list', help='List output files')
+        list_parser.add_argument('--directory', '-d', help='Output directory path (default: output)')
+        list_parser.add_argument('--type', '-t', choices=['images', 'ascii', 'svg', 'animations', 'benchmarks'],
+                                help='File type to list (default: all)')
+
+        # Clean output directory
+        clean_parser = output_subparsers.add_parser('clean', help='Clean output directory')
+        clean_parser.add_argument('--directory', '-d', help='Output directory path (default: output)')
+        clean_parser.add_argument('--temp-only', action='store_true', help='Clean only temporary files')
+        clean_parser.add_argument('--max-age', type=int, default=24, help='Maximum age in hours for temp files')
+
+        # Show output directory info
+        info_parser = output_subparsers.add_parser('info', help='Show output directory information')
+        info_parser.add_argument('--directory', '-d', help='Output directory path (default: output)')
         
         return parser
 
@@ -330,6 +354,159 @@ Examples:
         print("-" * 50)
         print(f"Fastest algorithm: {fastest[0]} ({fastest[1]['avg']:.4f}s average)")
 
+    def manage_output_directory(self, args: argparse.Namespace) -> None:
+        """Handle output directory management commands."""
+        if not args.output_command:
+            print("Error: No output management command specified")
+            return
+
+        # Get output directory
+        output_dir = args.directory if hasattr(args, 'directory') and args.directory else self.config.export.output_directory
+
+        try:
+            manager = OutputManager(output_dir)
+
+            if args.output_command == 'init':
+                self._init_output_directory(manager)
+            elif args.output_command == 'list':
+                self._list_output_files(manager, getattr(args, 'type', None))
+            elif args.output_command == 'clean':
+                self._clean_output_directory(manager, args)
+            elif args.output_command == 'info':
+                self._show_output_info(manager)
+
+        except OutputDirectoryError as e:
+            print(f"Error: {e}")
+
+    def _init_output_directory(self, manager: OutputManager) -> None:
+        """Initialize output directory structure."""
+        print(f"Initializing output directory: {manager.base_output_dir}")
+
+        if manager.initialize_output_structure():
+            print("✓ Output directory structure created successfully")
+
+            # Show created structure
+            print("\nCreated directories:")
+            for subdir_name in manager.subdirs.values():
+                subdir_path = manager.base_output_dir / subdir_name
+                if subdir_path.exists():
+                    print(f"  - {subdir_name}/")
+        else:
+            print("✗ Failed to create output directory structure")
+
+    def _list_output_files(self, manager: OutputManager, file_type: Optional[str] = None) -> None:
+        """List files in output directory."""
+        print(f"Output directory: {manager.base_output_dir}")
+
+        if not manager.base_output_dir.exists():
+            print("Output directory does not exist. Run 'maze-gen output init' to create it.")
+            return
+
+        file_lists = manager.list_output_files(file_type)
+        total_files = 0
+
+        for category, files in file_lists.items():
+            if files:
+                print(f"\n{category.upper()} ({len(files)} files):")
+                for file_path in files:
+                    print(f"  {file_path}")
+                total_files += len(files)
+
+        if total_files == 0:
+            print("\nNo files found in output directory.")
+        else:
+            print(f"\nTotal files: {total_files}")
+
+            # Show directory size
+            size_bytes = manager.get_directory_size()
+            if size_bytes > 1024 * 1024:
+                size_str = f"{size_bytes / (1024 * 1024):.1f} MB"
+            elif size_bytes > 1024:
+                size_str = f"{size_bytes / 1024:.1f} KB"
+            else:
+                size_str = f"{size_bytes} bytes"
+            print(f"Directory size: {size_str}")
+
+    def _clean_output_directory(self, manager: OutputManager, args: argparse.Namespace) -> None:
+        """Clean output directory."""
+        print(f"Cleaning output directory: {manager.base_output_dir}")
+
+        if not manager.base_output_dir.exists():
+            print("Output directory does not exist.")
+            return
+
+        if args.temp_only:
+            # Clean only temporary files
+            cleaned = manager.cleanup_temp_files(args.max_age)
+            print(f"Cleaned up {cleaned} temporary files older than {args.max_age} hours")
+        else:
+            # Ask for confirmation before cleaning all files
+            response = input("This will delete ALL files in the output directory. Continue? (y/N): ")
+            if response.lower() in ['y', 'yes']:
+                import shutil
+                try:
+                    shutil.rmtree(manager.base_output_dir)
+                    print("✓ Output directory cleaned successfully")
+
+                    # Recreate structure
+                    if manager.initialize_output_structure():
+                        print("✓ Output directory structure recreated")
+                except Exception as e:
+                    print(f"✗ Error cleaning directory: {e}")
+            else:
+                print("Cleaning cancelled")
+
+    def _show_output_info(self, manager: OutputManager) -> None:
+        """Show output directory information."""
+        print(f"Output Directory Information")
+        print("=" * 40)
+        print(f"Path: {manager.base_output_dir}")
+        print(f"Exists: {manager.base_output_dir.exists()}")
+
+        if manager.base_output_dir.exists():
+            # Directory size
+            size_bytes = manager.get_directory_size()
+            if size_bytes > 1024 * 1024:
+                size_str = f"{size_bytes / (1024 * 1024):.1f} MB"
+            elif size_bytes > 1024:
+                size_str = f"{size_bytes / 1024:.1f} KB"
+            else:
+                size_str = f"{size_bytes} bytes"
+            print(f"Size: {size_str}")
+
+            # File counts
+            file_lists = manager.list_output_files()
+            total_files = sum(len(files) for files in file_lists.values())
+            print(f"Total files: {total_files}")
+
+            for category, files in file_lists.items():
+                if files:
+                    print(f"  {category}: {len(files)} files")
+
+            # Disk usage
+            usage = manager.get_disk_usage()
+            if usage:
+                print(f"\nDisk Usage:")
+                print(f"  Total: {usage['total_gb']:.1f} GB")
+                print(f"  Used:  {usage['used_gb']:.1f} GB ({usage['usage_percent']:.1f}%)")
+                print(f"  Free:  {usage['free_gb']:.1f} GB")
+
+                # Check available space
+                has_space_100mb = manager.check_available_space(100)
+                has_space_1gb = manager.check_available_space(1000)
+                print(f"\nAvailable space check:")
+                print(f"  100 MB: {'✓' if has_space_100mb else '✗'}")
+                print(f"  1 GB:   {'✓' if has_space_1gb else '✗'}")
+
+        # Configuration info
+        print(f"\nConfiguration:")
+        print(f"  Auto-create directories: {self.config.export.auto_create_directories}")
+        print(f"  Organize by algorithm: {self.config.export.organize_by_algorithm}")
+        print(f"  Organize by date: {self.config.export.organize_by_date}")
+        print(f"  Use timestamped filenames: {self.config.export.use_timestamped_filenames}")
+        print(f"  Cleanup temp files: {self.config.export.cleanup_temp_files}")
+        print(f"  Temp file max age: {self.config.export.temp_file_max_age_hours} hours")
+
     def _get_output_filename(self, args: argparse.Namespace, base_name: str = None) -> str:
         """Generate output filename based on arguments and configuration."""
         if args.output:
@@ -449,6 +626,8 @@ Examples:
                 self.interactive_mode(parsed_args)
             elif parsed_args.command == 'benchmark':
                 self.benchmark_algorithms(parsed_args)
+            elif parsed_args.command == 'output':
+                self.manage_output_directory(parsed_args)
         except KeyboardInterrupt:
             print("\nOperation cancelled by user")
         except Exception as e:
