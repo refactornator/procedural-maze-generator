@@ -122,26 +122,46 @@ jobs:
     - name: Test basic usage example
       run: |
         cd examples
-        python basic_usage.py || true
-    
+        echo "Testing basic_usage.py..."
+        python basic_usage.py || echo "basic_usage.py failed, continuing..."
+        echo "Files created by basic_usage.py:"
+        ls -la *.png *.txt *.svg 2>/dev/null || echo "No output files found"
+
     - name: Test output directory demo
       run: |
         cd examples
-        python output_directory_demo.py || true
-    
+        echo "Testing output_directory_demo.py..."
+        python output_directory_demo.py || echo "output_directory_demo.py failed, continuing..."
+        echo "Files in demo_output:"
+        ls -la demo_output/ 2>/dev/null || echo "No demo_output directory found"
+
     - name: Test performance comparison
       run: |
         cd examples
-        timeout 120 python performance_comparison.py || true
+        echo "Testing performance_comparison.py..."
+        timeout 120 python performance_comparison.py || echo "performance_comparison.py failed, continuing..."
     
+    - name: List all generated files
+      run: |
+        echo "=== Files in examples directory ==="
+        find examples/ -type f -name "*.png" -o -name "*.txt" -o -name "*.svg" 2>/dev/null || echo "No output files in examples/"
+        echo "=== Files in current directory ==="
+        find . -maxdepth 1 -type f -name "*.png" -o -name "*.txt" -o -name "*.svg" 2>/dev/null || echo "No output files in current directory"
+        echo "=== Files in demo_output ==="
+        find demo_output/ -type f 2>/dev/null || echo "No demo_output directory or files"
+        echo "=== All files in examples ==="
+        ls -la examples/ || echo "Examples directory not accessible"
+
     - name: Upload example outputs
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: example-outputs
         path: |
-          examples/*.png
-          examples/*.txt
-          examples/*.svg
+          examples/
           demo_output/
+          *.png
+          *.txt
+          *.svg
         retention-days: 7
+        include-hidden-files: false

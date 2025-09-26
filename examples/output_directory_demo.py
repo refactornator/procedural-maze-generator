@@ -22,7 +22,16 @@ from maze_generator.algorithms.generators import (
     PrimGenerator,
 )
 from maze_generator.algorithms.solvers import AStarSolver
-from maze_generator.visualization import ImageExporter, AsciiRenderer
+from maze_generator.visualization import AsciiRenderer
+
+# Optional visualization imports
+try:
+    from maze_generator.visualization import ImageExporter
+    HAS_IMAGE_EXPORT = True
+except ImportError:
+    print("Note: ImageExporter not available (missing matplotlib/PIL)")
+    ImageExporter = None
+    HAS_IMAGE_EXPORT = False
 from maze_generator.utils.output_manager import OutputManager, OutputDirectoryError
 from maze_generator.config import get_config
 
@@ -76,9 +85,13 @@ def demo_file_organization(manager):
         'prim': PrimGenerator,
     }
     
+    if not HAS_IMAGE_EXPORT:
+        print("Skipping image generation - ImageExporter not available")
+        return
+
     exporter = ImageExporter(cell_size=20, wall_width=2)
     ascii_renderer = AsciiRenderer()
-    
+
     for algo_name, generator_class in algorithms.items():
         print(f"\nGenerating maze with {algo_name.upper()} algorithm...")
         

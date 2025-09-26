@@ -20,11 +20,17 @@ from maze_generator.algorithms.solvers import (
     BreadthFirstSearchSolver,
     DijkstraSolver,
 )
-from maze_generator.visualization import (
-    AsciiRenderer,
-    MatplotlibRenderer,
-    ImageExporter,
-)
+from maze_generator.visualization import AsciiRenderer
+
+# Optional visualization imports
+try:
+    from maze_generator.visualization import MatplotlibRenderer, ImageExporter
+    HAS_ADVANCED_VIZ = True
+except ImportError:
+    print("Note: Some visualization features not available (missing matplotlib/PIL)")
+    MatplotlibRenderer = None
+    ImageExporter = None
+    HAS_ADVANCED_VIZ = False
 
 
 def main():
@@ -71,11 +77,14 @@ def main():
         print()
         
         # Save as image
-        exporter = ImageExporter(cell_size=30, wall_width=2)
-        filename = f"maze_{name.lower().replace(' ', '_').replace("'", '')}.png"
-        exporter.export_png(maze, filename, show_solution=True, 
-                           title=f"Maze - {name}")
-        print(f"Saved image: {filename}")
+        if HAS_ADVANCED_VIZ and ImageExporter is not None:
+            exporter = ImageExporter(cell_size=30, wall_width=2)
+            filename = f"maze_{name.lower().replace(' ', '_').replace("'", '')}.png"
+            exporter.export_png(maze, filename, show_solution=True,
+                               title=f"Maze - {name}")
+            print(f"Saved image: {filename}")
+        else:
+            print("Image export skipped (ImageExporter not available)")
         print("-" * 50)
 
 
@@ -131,20 +140,23 @@ def visualization_examples():
     print(ascii_renderer.render_compact(maze, show_solution=True))
     
     print("\n3. Exporting to different formats...")
-    
+
     # Export to different image formats
-    exporter = ImageExporter(cell_size=25, wall_width=2)
-    
-    formats = [
-        ("PNG", "sample_maze.png", exporter.export_png),
-        ("JPEG", "sample_maze.jpg", exporter.export_jpg),
-        ("SVG", "sample_maze.svg", exporter.export_svg),
-    ]
-    
-    for format_name, filename, export_func in formats:
-        export_func(maze, filename, show_solution=True, 
-                   title=f"Sample Maze ({format_name})")
-        print(f"   Exported {format_name}: {filename}")
+    if HAS_ADVANCED_VIZ and ImageExporter is not None:
+        exporter = ImageExporter(cell_size=25, wall_width=2)
+
+        formats = [
+            ("PNG", "sample_maze.png", exporter.export_png),
+            ("JPEG", "sample_maze.jpg", exporter.export_jpg),
+            ("SVG", "sample_maze.svg", exporter.export_svg),
+        ]
+
+        for format_name, filename, export_func in formats:
+            export_func(maze, filename, show_solution=True,
+                       title=f"Sample Maze ({format_name})")
+            print(f"   Exported {format_name}: {filename}")
+    else:
+        print("   Image export skipped (ImageExporter not available)")
     
     # Save ASCII to file
     ascii_renderer.save_to_file(maze, "sample_maze.txt", 
