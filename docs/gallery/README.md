@@ -15,8 +15,8 @@ Visual examples showcasing different algorithms and solving methods.
 | Algorithm | Description | Example |
 |-----------|-------------|---------|
 | **A*** | Optimal with heuristics | ![A*](solutions/astar_solution_example.svg) |
-| **Dijkstra** | Guaranteed shortest path | <details><summary>View Solution</summary><br><br>```<br>┌───────────────────────────┐<br>│ Dijkstra Solution (37 steps) │<br>├───────────────────────────┤<br>│ █████████████████████████ │<br>│ █S█·······█···········  █ │<br>│ █·█·█████·█·█████████·███ │<br>│ █·█·····█···█   █   █···█ │<br>│ █·█████·█████ █ ███ ███·█ │<br>│ █·····█·█     █       █·█ │<br>│ █████·█·█ ███████ █████·█ │<br>│ █                     █E█ │<br>│ █████████████████████████ │<br>└───────────────────────────┘<br>```<br></details> |
-| **BFS** | Level-by-level exploration | <details><summary>View Solution</summary><br><br>```<br>┌───────────────────────────┐<br>│ BFS Solution (37 steps)   │<br>├───────────────────────────┤<br>│ █████████████████████████ │<br>│ █S█·······█···········  █ │<br>│ █·█·█████·█·█████████·███ │<br>│ █·█·····█···█   █   █···█ │<br>│ █·█████·█████ █ ███ ███·█ │<br>│ █·····█·█     █       █·█ │<br>│ █████·█·█ ███████ █████·█ │<br>│ █                     █E█ │<br>│ █████████████████████████ │<br>└───────────────────────────┘<br>```<br></details> |
+| **Dijkstra** | Guaranteed shortest path | <details><summary>View Solution</summary><pre>┌───────────────────────────┐<br>│ Dijkstra Solution (37 steps) │<br>├───────────────────────────┤<br>│ █████████████████████████ │<br>│ █S█·······█···········  █ │<br>│ █·█·█████·█·█████████·███ │<br>│ █·█·····█···█   █   █···█ │<br>│ █·█████·█████ █ ███ ███·█ │<br>│ █·····█·█     █       █·█ │<br>│ █████·█·█ ███████ █████·█ │<br>│ █                     █E█ │<br>│ █████████████████████████ │<br>└───────────────────────────┘</pre></details> |
+| **BFS** | Level-by-level exploration | <details><summary>View Solution</summary><pre>┌───────────────────────────┐<br>│ BFS Solution (37 steps)   │<br>├───────────────────────────┤<br>│ █████████████████████████ │<br>│ █S█·······█···········  █ │<br>│ █·█·█████·█·█████████·███ │<br>│ █·█·····█···█   █   █···█ │<br>│ █·█████·█████ █ ███ ███·█ │<br>│ █·····█·█     █       █·█ │<br>│ █████·█·█ ███████ █████·█ │<br>│ █                     █E█ │<br>│ █████████████████████████ │<br>└───────────────────────────┘</pre></details> |
 
 ## Algorithm Comparison
 
@@ -24,11 +24,34 @@ Visual examples showcasing different algorithms and solving methods.
 
 ## Output Formats
 
-| Format | Description | Example |
-|--------|-------------|---------|
-| **ASCII** | Text-based, universal | <details><summary>View ASCII</summary><br><br>```<br>+-+-+-+-+-+-+-+-+-+-+<br>|S ·|       | | |   |<br>+-+ +-+ +-+-+ + +-+ +<br>|· ·        |       |<br>+ +-+-+-+-+-+ +-+-+ +<br>|· · ·  | | |   |   |<br>+ + + +-+ + + +-+-+-+<br>| | |· ·  |         |<br>+ + +-+ +-+-+-+ + + +<br>| | | |·|  · ·  | | |<br>+-+-+ + +-+ + +-+-+-+<br>|      · · ·|·|  · ·|<br>+ + +-+-+-+-+ +-+ + +<br>| |       |  ·|· ·|·|<br>+ + + + +-+-+ + +-+ +<br>| | | | |    · ·|  E|<br>+-+-+-+-+-+-+-+-+-+-+<br>```<br></details> |
-| **SVG** | Scalable vector graphics | ![SVG](formats/svg_maze_example.svg) |
-| **PNG** | High-quality images | ![PNG](formats/png_maze_example.png) |
+### ASCII Format
+<details>
+<summary>Click to view ASCII maze</summary>
+
+```
++-+-+-+-+-+-+-+-+-+-+
+|S ·|       | | |   |
++-+ +-+ +-+-+ + +-+ +
+|· ·        |       |
++ +-+-+-+-+-+ +-+-+ +
+|· · ·  | | |   |   |
++ + + +-+ + + +-+-+-+
+| | |· ·  |         |
++ + +-+ +-+-+-+ + + +
+| | | |·|  · ·  | | |
++-+-+ + +-+ + +-+-+-+
+|      · · ·|·|  · ·|
++ + +-+-+-+-+ +-+ + +
+| |       |  ·|· ·|·|
++ + + + +-+-+ + +-+ +
+| | | | |    · ·|  E|
++-+-+-+-+-+-+-+-+-+-+
+```
+
+</details>
+
+### SVG Format
+Use the algorithm examples above - they're all in SVG format for scalable, high-quality display.
 
 ## Quick Start
 
