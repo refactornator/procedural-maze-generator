@@ -6,15 +6,15 @@ Visual examples showcasing different algorithms and solving methods.
 
 | Algorithm | Description | Example |
 |-----------|-------------|---------|
-| **DFS** | Long winding passages | [View](algorithms/dfs_maze_example.svg) |
-| **Kruskal** | Uniform distribution | [View](algorithms/kruskal_maze_example.svg) |
-| **Prim** | Short passages, more branching | [View](algorithms/prim_maze_example.svg) |
+| **DFS** | Long winding passages | ![DFS](algorithms/dfs_maze_example.svg) |
+| **Kruskal** | Uniform distribution | ![Kruskal](algorithms/kruskal_maze_example.svg) |
+| **Prim** | Short passages, more branching | ![Prim](algorithms/prim_maze_example.svg) |
 
 ## Solving Algorithms
 
 | Algorithm | Description | Example |
 |-----------|-------------|---------|
-| **A*** | Optimal with heuristics | [View](solutions/astar_solution_example.svg) |
+| **A*** | Optimal with heuristics | ![A*](solutions/astar_solution_example.svg) |
 | **Dijkstra** | Guaranteed shortest path | [View](solutions/dijkstra_solution.txt) |
 | **BFS** | Level-by-level exploration | [View](solutions/bfs_solution.txt) |
 
@@ -27,7 +27,7 @@ Visual examples showcasing different algorithms and solving methods.
 | Format | Description | Example |
 |--------|-------------|---------|
 | **ASCII** | Text-based, universal | [View](formats/ascii_compact_example.txt) |
-| **SVG** | Scalable vector graphics | [View](formats/svg_maze_example.svg) |
+| **SVG** | Scalable vector graphics | ![SVG](formats/svg_maze_example.svg) |
 | **PNG** | High-quality images | [View](formats/png_maze_example.png) |
 
 ## Quick Start
