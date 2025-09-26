@@ -1,0 +1,57 @@
+# GitHub Pages Configuration for Procedural Maze Generator
+
+# Theme
+theme: minima
+title: "Procedural Maze Generator"
+description: "A comprehensive Python library for generating and solving mazes using various algorithms"
+
+# Site settings
+url: "https://yourusername.github.io"
+baseurl: "/procedural-maze-generator"
+author: "Maze Generator Team"
+
+# Navigation
+header_pages:
+  - gallery/README.md
+  - DEMO_VISIBILITY.md
+
+# Collections
+collections:
+  gallery:
+    output: true
+    permalink: /:collection/:name/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Markdown settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - "*.py"
+  - "*.pyc"
+  - __pycache__/
+  - .pytest_cache/
+  - build/
+  - dist/
+  - "*.egg-info/"
+
+# Include
+include:
+  - _pages
+  - gallery
