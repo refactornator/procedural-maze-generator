@@ -80,10 +80,10 @@ def generate_algorithm_examples(gallery_dir: Path):
             f.write(ascii_output)
         
         # Image output (if available)
-        if HAS_IMAGE_EXPORT:
+        if HAS_IMAGE_EXPORT and ImageExporter is not None:
             exporter = ImageExporter(cell_size=25, wall_width=2)
             image_file = gallery_dir / "algorithms" / f"{algo_name}_maze_example.png"
-            exporter.export_png(maze, str(image_file), 
+            exporter.export_png(maze, str(image_file),
                               title=f"{display_name} Maze",
                               add_border=True)
 
@@ -126,7 +126,7 @@ def generate_solution_examples(gallery_dir: Path):
                 f.write(ascii_output)
             
             # Image output (if available)
-            if HAS_IMAGE_EXPORT:
+            if HAS_IMAGE_EXPORT and ImageExporter is not None:
                 exporter = ImageExporter(cell_size=30, wall_width=2)
                 image_file = gallery_dir / "solutions" / f"{solver_name}_solution_example.png"
                 exporter.export_png(maze, str(image_file),
@@ -168,7 +168,7 @@ def generate_format_examples(gallery_dir: Path):
         f.write(detailed_ascii)
     
     # Image formats (if available)
-    if HAS_IMAGE_EXPORT:
+    if HAS_IMAGE_EXPORT and ImageExporter is not None:
         exporter = ImageExporter(cell_size=35, wall_width=3)
         
         # PNG format
@@ -216,7 +216,7 @@ def generate_comparison_examples(gallery_dir: Path):
         comparison_text += "\n```\n\n"
         
         # Individual image (if available)
-        if HAS_IMAGE_EXPORT:
+        if HAS_IMAGE_EXPORT and ImageExporter is not None:
             exporter = ImageExporter(cell_size=25, wall_width=2)
             image_file = gallery_dir / "comparisons" / f"comparison_{algo_name.lower()}.png"
             exporter.export_png(maze, str(image_file),
@@ -257,7 +257,7 @@ def generate_readme_examples(gallery_dir: Path):
         f.write("\n```\n")
     
     # Small image for README (if available)
-    if HAS_IMAGE_EXPORT:
+    if HAS_IMAGE_EXPORT and ImageExporter is not None:
         exporter = ImageExporter(cell_size=40, wall_width=3)
         exporter.export_png(maze, str(readme_dir / "readme_example.png"),
                           show_solution=True,
