@@ -1,0 +1,73 @@
+# Demo Configuration for Procedural Maze Generator
+# This configuration is optimized for demonstration purposes
+
+visualization:
+  # Larger cells for better visibility in demos
+  cell_size: 30
+  wall_width: 3
+  
+  # High contrast colors for demos
+  colors:
+    wall: '#000000'        # Black walls
+    path: '#FFFFFF'        # White paths
+    start: '#00FF00'       # Bright green start
+    end: '#FF0000'         # Bright red end
+    solution: '#0066FF'    # Bright blue solution
+    visited: '#FFFF00'     # Yellow visited cells
+    current: '#FF6600'     # Orange current cell
+    frontier: '#9900FF'    # Purple frontier cells
+    background: '#F5F5F5'  # Light gray background
+
+generation:
+  # Use DFS as default for demos (creates interesting mazes)
+  default_algorithm: 'dfs'
+  
+  # Good demo sizes
+  default_width: 15
+  default_height: 12
+  
+  # Fixed seed for reproducible demos
+  default_seed: 42
+  
+  # Slower animation for demos
+  animation_delay_ms: 100
+
+solving:
+  # Use A* as default (optimal and fast)
+  default_algorithm: 'astar'
+  
+  # Slower animation for demos
+  animation_delay_ms: 150
+  
+  # Show everything for demos
+  show_visited: true
+  show_path: true
+
+export:
+  # PNG is best for demos
+  default_format: 'png'
+  
+  # High quality for demos
+  default_dpi: 300
+  jpeg_quality: 95
+  
+  # Always add borders and titles for demos
+  add_border: true
+  add_title: true
+  
+  # Demo output directory
+  output_directory: 'demo_output'
+  
+  # Organize files for better demo structure
+  organize_by_algorithm: true
+  organize_by_date: false
+  
+  # Auto-create directories
+  auto_create_directories: true
+  
+  # Use timestamped filenames for demos
+  use_timestamped_filenames: true
+  
+  # Keep demos clean
+  cleanup_temp_files: true
+  temp_file_max_age_hours: 1  # Clean up quickly for demos

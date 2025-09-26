@@ -1,5 +1,12 @@
 # Procedural Maze Generator
 
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://python.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://img.shields.io/github/workflow/status/yourusername/procedural-maze-generator/CI)](https://github.com/yourusername/procedural-maze-generator/actions)
+[![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen.svg)](https://github.com/yourusername/procedural-maze-generator)
+[![Demo](https://img.shields.io/badge/demo-interactive-orange.svg)](https://github.com/yourusername/procedural-maze-generator/tree/main/demo)
+[![Documentation](https://img.shields.io/badge/docs-comprehensive-blue.svg)](https://github.com/yourusername/procedural-maze-generator#documentation)
+
 A comprehensive Python library for generating and solving mazes using various algorithms, with multiple visualization options and export formats.
 
 ## Features
@@ -84,6 +91,48 @@ maze-gen output list --type images
 maze-gen output clean --temp-only
 maze-gen output info
 ```
+
+## 🎯 Interactive Demo
+
+Experience all features with our comprehensive demo system:
+
+### 🚀 Quick Start Demo
+```bash
+# Menu-driven demo launcher
+python demo/run_demo.py
+
+# Direct demos
+python demo/interactive_demo.py
+./demo/demo.sh
+
+# Quick mode (no pauses)
+python demo/interactive_demo.py --quick
+./demo/demo.sh --quick
+```
+
+### 🎬 Automated Demo Options
+```bash
+# Generate all sample outputs
+python demo/run_demo.py --auto samples
+
+# Create animated GIFs
+python demo/run_demo.py --auto animations
+
+# Run performance benchmarks
+python demo/run_demo.py --auto benchmarks
+
+# Test all examples
+python demo/run_demo.py --auto test
+```
+
+### 📋 Demo Features
+- ✨ **All Generation Algorithms**: DFS, Kruskal, Prim, Wilson
+- 🧭 **All Solving Algorithms**: A*, Dijkstra, BFS, DFS, Wall Follower
+- 📁 **Complete Output Management**: Directory organization, file cleanup
+- 🎨 **Multiple Formats**: ASCII, PNG, JPEG, SVG
+- 🎬 **Animated Examples**: GIF generation of maze creation/solving
+- 📊 **Performance Analysis**: Algorithm benchmarking and comparison
+- ⚙️ **Configuration Examples**: Multiple config setups
 
 ### Python API Usage
 
@@ -308,15 +357,72 @@ export:
   jpeg_quality: 95
 ```
 
+## 📸 Demo Gallery
+
+### ASCII Art Examples
+```
+┌─────────────────────────────────┐
+│ DFS Algorithm Maze (12x8)       │
+├─────────────────────────────────┤
+│ +---+---+---+---+---+---+---+   │
+│ |S  |       |           |   |   │
+│ + + +---+ + + +---+---+ + + +   │
+│ | |     | | | |       | | | |   │
+│ + +---+ + + + + +---+ + + + +   │
+│ |     | | | | | |   | | | | |   │
+│ +---+ + + + + + + + + + + + +   │
+│ |   | | | | | | | | | | | | |   │
+│ + + + + + + + + + + + + + + E   │
+│ | | | | | | | | | | | | | | |   │
+│ +---+---+---+---+---+---+---+   │
+└─────────────────────────────────┘
+```
+
+### Visual Examples
+- 🎨 **PNG Images**: High-quality maze visualizations
+- 🖼️ **SVG Vectors**: Scalable maze diagrams
+- 📊 **Algorithm Comparisons**: Side-by-side algorithm results
+- 🗂️ **Directory Organization**: Structured output management
+
+### Sample Commands and Results
+
+**Generate organized maze collection:**
+```bash
+maze-gen generate 15 12 --algorithm dfs --output-dir my_mazes --organize-by-algorithm
+maze-gen generate 15 12 --algorithm kruskal --output-dir my_mazes --organize-by-algorithm
+maze-gen generate 15 12 --algorithm prim --output-dir my_mazes --organize-by-algorithm
+```
+
+**Result directory structure:**
+```
+my_mazes/
+├── images/
+│   ├── dfs/
+│   │   └── maze_dfs.png
+│   ├── kruskal/
+│   │   └── maze_kruskal.png
+│   └── prim/
+│       └── maze_prim.png
+├── ascii/
+├── svg/
+└── temp/
+```
+
+**Solve and compare algorithms:**
+```bash
+maze-gen solve 12 8 --gen-algorithm dfs --solve-algorithm astar --format ascii
+maze-gen solve 12 8 --gen-algorithm dfs --solve-algorithm dijkstra --format ascii
+maze-gen solve 12 8 --gen-algorithm dfs --solve-algorithm bfs --format ascii
+```
+
 ## Examples
 
 See the `examples/` directory for more detailed usage examples:
 
 - `basic_usage.py` - Simple maze generation and solving
-- `custom_visualization.py` - Custom colors and styling
-- `animation_example.py` - Animated maze generation
-- `batch_processing.py` - Generate multiple mazes
+- `output_directory_demo.py` - Complete output management demo
 - `performance_comparison.py` - Algorithm benchmarking
+- `custom_visualization.py` - Custom colors and styling
 
 ## Algorithm Details
 

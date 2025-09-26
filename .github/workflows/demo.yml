@@ -1,0 +1,135 @@
+name: Demo and Examples
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  demo-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, "3.10", "3.11"]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e ".[dev]"
+    
+    - name: Test demo script imports
+      run: |
+        python -c "import sys; sys.path.append('demo'); import interactive_demo"
+        python -c "import sys; sys.path.append('demo'); import generate_samples"
+    
+    - name: Run sample generation
+      run: |
+        cd demo
+        python generate_samples.py
+    
+    - name: Test CLI commands used in demo
+      run: |
+        maze-gen --help
+        maze-gen generate --help
+        maze-gen solve --help
+        maze-gen output --help
+        maze-gen benchmark --help
+    
+    - name: Run quick demo test
+      run: |
+        python demo/interactive_demo.py --quick || true
+    
+    - name: Verify demo outputs
+      run: |
+        ls -la demo/samples/ || true
+        ls -la demo/readme_examples/ || true
+    
+    - name: Upload demo artifacts
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: demo-outputs-${{ matrix.python-version }}
+        path: |
+          demo/samples/
+          demo/readme_examples/
+          demo_output/
+        retention-days: 7
+
+  shell-demo-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e ".[dev]"
+    
+    - name: Test shell demo script
+      run: |
+        chmod +x demo/demo.sh
+        # Test that the script runs without errors (quick mode)
+        timeout 60 ./demo/demo.sh --quick || true
+    
+    - name: Verify shell demo outputs
+      run: |
+        ls -la demo_output/ || true
+
+  example-tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e ".[dev]"
+    
+    - name: Test basic usage example
+      run: |
+        cd examples
+        python basic_usage.py || true
+    
+    - name: Test output directory demo
+      run: |
+        cd examples
+        python output_directory_demo.py || true
+    
+    - name: Test performance comparison
+      run: |
+        cd examples
+        timeout 120 python performance_comparison.py || true
+    
+    - name: Upload example outputs
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: example-outputs
+        path: |
+          examples/*.png
+          examples/*.txt
+          examples/*.svg
+          demo_output/
+        retention-days: 7

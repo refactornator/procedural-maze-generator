@@ -1,0 +1,73 @@
+# Presentation Configuration for Procedural Maze Generator
+# Optimized for presentations and screenshots
+
+visualization:
+  # Extra large cells for presentations
+  cell_size: 40
+  wall_width: 4
+  
+  # High contrast presentation colors
+  colors:
+    wall: '#1a1a1a'        # Dark gray walls (softer than black)
+    path: '#ffffff'        # Pure white paths
+    start: '#00cc44'       # Green start (more professional)
+    end: '#cc0044'         # Red end (more professional)
+    solution: '#0066cc'    # Blue solution (professional)
+    visited: '#ffcc00'     # Gold visited cells
+    current: '#ff6600'     # Orange current cell
+    frontier: '#8800cc'    # Purple frontier cells
+    background: '#f8f8f8'  # Very light gray background
+
+generation:
+  # Kruskal creates more balanced mazes for presentations
+  default_algorithm: 'kruskal'
+  
+  # Good presentation sizes
+  default_width: 12
+  default_height: 10
+  
+  # Fixed seed for consistent presentations
+  default_seed: 123
+  
+  # No animation delay for presentations
+  animation_delay_ms: 0
+
+solving:
+  # A* is optimal and professional
+  default_algorithm: 'astar'
+  
+  # No animation delay for presentations
+  animation_delay_ms: 0
+  
+  # Show solution but not visited for cleaner look
+  show_visited: false
+  show_path: true
+
+export:
+  # SVG is best for presentations (scalable)
+  default_format: 'svg'
+  
+  # Very high quality
+  default_dpi: 600
+  jpeg_quality: 98
+  
+  # Professional appearance
+  add_border: true
+  add_title: true
+  
+  # Presentation output
+  output_directory: 'presentation_output'
+  
+  # Don't organize by algorithm for presentations
+  organize_by_algorithm: false
+  organize_by_date: false
+  
+  # Auto-create directories
+  auto_create_directories: true
+  
+  # Don't use timestamps for presentations
+  use_timestamped_filenames: false
+  
+  # Keep presentations clean
+  cleanup_temp_files: true
+  temp_file_max_age_hours: 1
