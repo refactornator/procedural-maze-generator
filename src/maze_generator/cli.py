@@ -20,10 +20,14 @@ from .algorithms.solvers import (
     DepthFirstSearchSolver,
     WallFollowerSolver,
 )
-from .visualization.matplotlib_renderer import MatplotlibRenderer
-from .visualization.ascii_renderer import AsciiRenderer
-from .visualization.pygame_renderer import PygameRenderer
-from .visualization.image_exporter import ImageExporter
+from .visualization import AsciiRenderer
+# Optional visualization imports
+try:
+    from .visualization import MatplotlibRenderer, PygameRenderer, ImageExporter
+except ImportError:
+    MatplotlibRenderer = None
+    PygameRenderer = None
+    ImageExporter = None
 from .utils.output_manager import OutputManager, OutputDirectoryError
 from .config import get_config
 
@@ -86,7 +90,7 @@ Examples:
                                default='ascii', help='Output format (default: ascii)')
         gen_parser.add_argument('--cell-size', type=int, default=20, help='Cell size in pixels (default: 20)')
         gen_parser.add_argument('--wall-width', type=int, default=2, help='Wall width in pixels (default: 2)')
-        gen_parser.add_argument('--title', help='Title for the maze')
+        gen_parser.add_argument('--title', type=str, help='Title for the maze')
         gen_parser.add_argument('--start', nargs=2, type=int, metavar=('X', 'Y'),
                                help='Start position (default: top-left)')
         gen_parser.add_argument('--end', nargs=2, type=int, metavar=('X', 'Y'),
@@ -113,7 +117,7 @@ Examples:
                                  default='ascii', help='Output format (default: ascii)')
         solve_parser.add_argument('--cell-size', type=int, default=20, help='Cell size in pixels (default: 20)')
         solve_parser.add_argument('--wall-width', type=int, default=2, help='Wall width in pixels (default: 2)')
-        solve_parser.add_argument('--title', help='Title for the maze')
+        solve_parser.add_argument('--title', type=str, help='Title for the maze')
         solve_parser.add_argument('--start', nargs=2, type=int, metavar=('X', 'Y'),
                                  help='Start position (default: top-left)')
         solve_parser.add_argument('--end', nargs=2, type=int, metavar=('X', 'Y'),
@@ -301,9 +305,14 @@ Examples:
             generator.generate(maze)
             
             # Show interactive visualization
+            if PygameRenderer is None:
+                print("Error: pygame is required for interactive mode")
+                print("Install it with: pip install pygame")
+                return
+
             renderer = PygameRenderer(args.cell_size, args.wall_width)
             renderer.show_static(maze, title=f"Interactive Maze ({args.algorithm})")
-            
+
         except ImportError:
             print("Error: pygame is required for interactive mode")
             print("Install it with: pip install pygame")
@@ -561,6 +570,11 @@ Examples:
                 renderer.print_maze(maze, show_solution, title=title)
         
         elif args.format == 'matplotlib':
+            if MatplotlibRenderer is None:
+                print("Error: matplotlib is required for matplotlib format")
+                print("Install it with: pip install matplotlib")
+                return
+
             renderer = MatplotlibRenderer(args.cell_size, args.wall_width)
             if args.output or not sys.stdout.isatty():
                 filename = self._get_output_filename(args, "maze_matplotlib")
@@ -574,6 +588,11 @@ Examples:
                 renderer.show(maze, show_solution, show_visited)
 
         elif args.format in ['png', 'jpg', 'svg']:
+            if ImageExporter is None:
+                print(f"Error: Required dependencies for {args.format} format are not available")
+                print("Install them with: pip install matplotlib pillow")
+                return
+
             filename = self._get_output_filename(args)
             file_type = 'svg' if args.format == 'svg' else 'images'
             output_path = self._get_organized_output_path(args, filename, file_type)

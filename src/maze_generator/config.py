@@ -4,9 +4,16 @@ from __future__ import annotations
 from typing import Dict, Any, Optional, Union
 from dataclasses import dataclass, asdict
 from pathlib import Path
-import yaml
 import json
 import os
+
+# Optional YAML support
+try:
+    import yaml
+    HAS_YAML = True
+except ImportError:
+    yaml = None
+    HAS_YAML = False
 
 
 @dataclass
@@ -111,6 +118,8 @@ class ConfigManager:
             try:
                 with open(config_file, 'r', encoding='utf-8') as f:
                     if config_file.suffix.lower() in ['.yaml', '.yml']:
+                        if not HAS_YAML:
+                            raise ImportError("PyYAML is required for YAML config files. Install with: pip install PyYAML")
                         data = yaml.safe_load(f)
                     elif config_file.suffix.lower() == '.json':
                         data = json.load(f)
@@ -146,12 +155,17 @@ class ConfigManager:
         try:
             with open(self.config_path, 'w', encoding='utf-8') as f:
                 if self.config_path.suffix.lower() in ['.yaml', '.yml']:
+                    if not HAS_YAML:
+                        raise ImportError("PyYAML is required for YAML config files. Install with: pip install PyYAML")
                     yaml.dump(config_dict, f, default_flow_style=False, indent=2)
                 elif self.config_path.suffix.lower() == '.json':
                     json.dump(config_dict, f, indent=2)
                 else:
-                    # Default to YAML
-                    yaml.dump(config_dict, f, default_flow_style=False, indent=2)
+                    # Default to JSON if YAML not available
+                    if HAS_YAML:
+                        yaml.dump(config_dict, f, default_flow_style=False, indent=2)
+                    else:
+                        json.dump(config_dict, f, indent=2)
             
             print(f"Configuration saved to {self.config_path}")
             
