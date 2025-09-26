@@ -1,4 +1,4 @@
-# 🎯 Making Demo Outputs More Visible
+# Demo Visibility Documentation
 
 This document outlines all the strategies implemented to make the Procedural Maze Generator's demo outputs highly visible and accessible to users and contributors.
 
