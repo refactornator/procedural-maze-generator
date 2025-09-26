@@ -384,7 +384,7 @@ export:
 +---+---+---+---+---+---+---+---+
 ```
 
-[**📁 Full Gallery →**](docs/gallery/)
+[**📁 Full Gallery →**](docs/gallery/README.md)
 
 ### Sample Commands
 
