@@ -116,8 +116,8 @@ def generate_solution_examples(gallery_dir: Path):
         if solution:
             # ASCII output with solution
             ascii_renderer = AsciiRenderer()
-            ascii_output = ascii_renderer.render_detailed(
-                maze, show_solution=True, 
+            ascii_output = ascii_renderer.render_with_border(
+                maze, show_solution=True,
                 title=f"{display_name} Solution ({len(solution)} steps)"
             )
             
@@ -162,8 +162,8 @@ def generate_format_examples(gallery_dir: Path):
         f.write(compact_ascii)
     
     # Detailed ASCII
-    detailed_ascii = ascii_renderer.render_detailed(maze, show_solution=True, 
-                                                   title="Detailed ASCII Format")
+    detailed_ascii = ascii_renderer.render_with_border(maze, show_solution=True,
+                                                     title="Detailed ASCII Format")
     with open(gallery_dir / "formats" / "ascii_detailed_example.txt", 'w') as f:
         f.write(detailed_ascii)
     
