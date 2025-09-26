@@ -79,7 +79,7 @@ def main():
         # Save as image
         if HAS_ADVANCED_VIZ and ImageExporter is not None:
             exporter = ImageExporter(cell_size=30, wall_width=2)
-            filename = f"maze_{name.lower().replace(' ', '_').replace("'", '')}.png"
+            filename = f"maze_{name.lower().replace(' ', '_').replace(\"'\", '')}.png"
             exporter.export_png(maze, filename, show_solution=True,
                                title=f"Maze - {name}")
             print(f"Saved image: {filename}")

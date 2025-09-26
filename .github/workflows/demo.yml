@@ -140,6 +140,11 @@ jobs:
         cd examples
         echo "Testing performance_comparison.py..."
         timeout 120 python performance_comparison.py || echo "performance_comparison.py failed, continuing..."
+
+    - name: Run comprehensive example test
+      run: |
+        echo "Running comprehensive example test suite..."
+        python test_examples.py || echo "Example test suite completed with issues"
     
     - name: List all generated files
       run: |
