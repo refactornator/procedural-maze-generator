@@ -95,12 +95,33 @@ jobs:
     - name: Test shell demo script
       run: |
         chmod +x demo/demo.sh
+        echo "Testing shell demo script..."
         # Test that the script runs without errors (quick mode)
-        timeout 60 ./demo/demo.sh --quick || true
+        timeout 60 ./demo/demo.sh --quick || echo "Shell demo completed with issues"
+        echo "Shell demo test completed"
     
     - name: Verify shell demo outputs
       run: |
-        ls -la demo_output/ || true
+        echo "=== Shell demo output verification ==="
+        ls -la demo_output/ || echo "No demo_output directory found"
+        echo "=== Files in current directory ==="
+        ls -la *.png *.txt *.svg 2>/dev/null || echo "No output files in current directory"
+        echo "=== All files in demo_output ==="
+        find demo_output/ -type f 2>/dev/null || echo "No files in demo_output"
+
+    - name: Upload shell demo artifacts
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: shell-demo-outputs
+        path: |
+          demo_output/
+          *.png
+          *.txt
+          *.svg
+          demo/
+        retention-days: 7
+        include-hidden-files: false
 
   example-tests:
     runs-on: ubuntu-latest
