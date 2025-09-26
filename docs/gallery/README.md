@@ -15,8 +15,8 @@ Visual examples showcasing different algorithms and solving methods.
 | Algorithm | Description | Example |
 |-----------|-------------|---------|
 | **A*** | Optimal with heuristics | ![A*](solutions/astar_solution_example.svg) |
-| **Dijkstra** | Guaranteed shortest path | [View](solutions/dijkstra_solution.txt) |
-| **BFS** | Level-by-level exploration | [View](solutions/bfs_solution.txt) |
+| **Dijkstra** | Guaranteed shortest path | <details><summary>View Solution</summary><pre>┌───────────────────────────┐<br>│ Dijkstra's Algorithm Solution (37 steps) │<br>├───────────────────────────┤<br>│ █████████████████████████ │<br>│ █S█·······█···········  █ │<br>│ █·█·█████·█·█████████·███ │<br>│ █·█·····█···█   █   █···█ │<br>│ █·█████·█████ █ ███ ███·█ │<br>│ █·····█·█     █       █·█ │<br>│ █████·█·█ ███████ █████·█ │<br>│ █   █···█ █       █·····█ │<br>│ █ █ █ ███ ███████ █·█████ │<br>│ █ █ █     █     █ █·····█ │<br>│ ███ █████ █ ███ ███████·█ │<br>│ █ █ █     █ █   █     █·█ │<br>│ █ ███ ███ █ █ █ █████ █·█ │<br>│ █     █   █ █ █       █·█ │<br>│ █████ █ ███ █ █████████·█ │<br>│ █     █ █   █         █·█ │<br>│ █ █████ █ ███ █████████·█ │<br>│ █ █     █ █   █       █·█ │<br>│ █ █ █████ █ ███ █████ █·█ │<br>│ █   █     █     █     █·█ │<br>│ █████ █████████ █████ █·█ │<br>│ █                     █E█ │<br>│ █████████████████████████ │<br>└───────────────────────────┘</pre></details> |
+| **BFS** | Level-by-level exploration | <details><summary>View Solution</summary><pre>┌───────────────────────────┐<br>│ BFS Solution (37 steps)   │<br>├───────────────────────────┤<br>│ █████████████████████████ │<br>│ █S█·······█···········  █ │<br>│ █·█·█████·█·█████████·███ │<br>│ █·█·····█···█   █   █···█ │<br>│ █·█████·█████ █ ███ ███·█ │<br>│ █·····█·█     █       █·█ │<br>│ █████·█·█ ███████ █████·█ │<br>│ █                     █E█ │<br>│ █████████████████████████ │<br>└───────────────────────────┘</pre></details> |
 
 ## Algorithm Comparison
 
@@ -26,7 +26,7 @@ Visual examples showcasing different algorithms and solving methods.
 
 | Format | Description | Example |
 |--------|-------------|---------|
-| **ASCII** | Text-based, universal | [View](formats/ascii_compact_example.txt) |
+| **ASCII** | Text-based, universal | <details><summary>View ASCII</summary><pre>+-+-+-+-+-+-+-+-+-+-+<br>|S ·|       | | |   |<br>+-+ +-+ +-+-+ + +-+ +<br>|· ·        |       |<br>+ +-+-+-+-+-+ +-+-+ +<br>|· · ·  | | |   |   |<br>+ + + +-+ + + +-+-+-+<br>| | |· ·  |         |<br>+ + +-+ +-+-+-+ + + +<br>| | | |·|  · ·  | | |<br>+-+-+ + +-+ + +-+-+-+<br>|      · · ·|·|  · ·|<br>+ + +-+-+-+-+ +-+ + +<br>| |       |  ·|· ·|·|<br>+ + + + +-+-+ + +-+ +<br>| | | | |    · ·|  E|<br>+-+-+-+-+-+-+-+-+-+-+</pre></details> |
 | **SVG** | Scalable vector graphics | ![SVG](formats/svg_maze_example.svg) |
 | **PNG** | High-quality images | [View](formats/png_maze_example.png) |
 
