@@ -64,15 +64,15 @@ Our demo system provides multiple ways to explore the maze generator:
 
 ## 🤝 Community
 
-- **GitHub Repository**: [View Source Code](https://github.com/yourusername/procedural-maze-generator)
-- **Issue Tracker**: [Report Bugs or Request Features](https://github.com/yourusername/procedural-maze-generator/issues)
-- **Showcase**: [Share Your Amazing Mazes](https://github.com/yourusername/procedural-maze-generator/issues/new?template=showcase.md)
+- **GitHub Repository**: [View Source Code](https://github.com/refactornator/procedural-maze-generator)
+- **Issue Tracker**: [Report Bugs or Request Features](https://github.com/refactornator/procedural-maze-generator/issues)
+- **Showcase**: [Share Your Amazing Mazes](https://github.com/refactornator/procedural-maze-generator/issues/new?template=showcase.md)
 
 ## 📚 Documentation
 
 - [**Gallery**](gallery/) - Visual examples and comparisons
 - [**Demo Visibility**](DEMO_VISIBILITY.html) - How we make outputs accessible
-- [**GitHub Repository**](https://github.com/yourusername/procedural-maze-generator) - Full documentation and source code
+- [**GitHub Repository**](https://github.com/refactornator/procedural-maze-generator) - Full documentation and source code
 
 ---
 

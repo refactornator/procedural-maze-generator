@@ -2,9 +2,9 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/github/workflow/status/yourusername/procedural-maze-generator/CI)](https://github.com/yourusername/procedural-maze-generator/actions)
-[![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen.svg)](https://github.com/yourusername/procedural-maze-generator)
-[![Demo](https://img.shields.io/badge/demo-interactive-orange.svg)](https://github.com/yourusername/procedural-maze-generator/tree/main/demo)
+[![Build Status](https://img.shields.io/github/workflow/status/refactornator/procedural-maze-generator/CI)](https://github.com/refactornator/procedural-maze-generator/actions)
+[![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen.svg)](https://github.com/refactornator/procedural-maze-generator)
+[![Demo](https://img.shields.io/badge/demo-interactive-orange.svg)](https://github.com/refactornator/procedural-maze-generator/tree/main/demo)
 [![Documentation](https://img.shields.io/badge/docs-comprehensive-blue.svg)](https://github.com/yourusername/procedural-maze-generator#documentation)
 
 A comprehensive Python library for generating and solving mazes using various algorithms, with multiple visualization options and export formats.

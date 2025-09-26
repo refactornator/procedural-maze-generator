@@ -17,7 +17,7 @@ setup(
     description="A comprehensive procedural maze generator with multiple algorithms and visualization options",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/procedural-maze-generator",
+    url="https://github.com/refactornator/procedural-maze-generator",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     classifiers=[
