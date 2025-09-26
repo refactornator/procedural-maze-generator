@@ -357,36 +357,34 @@ export:
   jpeg_quality: 95
 ```
 
-## 📸 Demo Gallery
+## 📸 Gallery
 
-### 🎨 Visual Examples
+**Generation Algorithms**
+| DFS | Kruskal | Prim |
+|-----|---------|------|
+| ![DFS](docs/gallery/algorithms/dfs_maze_example.svg) | ![Kruskal](docs/gallery/algorithms/kruskal_maze_example.svg) | ![Prim](docs/gallery/algorithms/prim_maze_example.svg) |
 
-| Algorithm | Example | Solved |
-|-----------|---------|--------|
-| **DFS** | ![DFS](docs/gallery/algorithms/dfs_maze_example.png) | ![DFS Solved](docs/gallery/solutions/astar_solution_example.png) |
-| **Kruskal** | ![Kruskal](docs/gallery/algorithms/kruskal_maze_example.png) | ![Dijkstra](docs/gallery/solutions/dijkstra_solution_example.png) |
-| **Prim** | ![Prim](docs/gallery/algorithms/prim_maze_example.png) | ![BFS](docs/gallery/solutions/bfs_solution_example.png) |
+**Maze Solving**
+| A* Solution |
+|-------------|
+| ![A* Solution](docs/gallery/solutions/astar_solution_example.svg) |
 
-### ASCII Art Examples
+**ASCII Example**
 ```
-┌─────────────────────────────────┐
-│ DFS Algorithm Maze (12x8)       │
-├─────────────────────────────────┤
-│ +---+---+---+---+---+---+---+   │
-│ |S  |       |           |   |   │
-│ + + +---+ + + +---+---+ + + +   │
-│ | |     | | | |       | | | |   │
-│ + +---+ + + + + +---+ + + + +   │
-│ |     | | | | | |   | | | | |   │
-│ +---+ + + + + + + + + + + + +   │
-│ |   | | | | | | | | | | | | |   │
-│ + + + + + + + + + + + + + + E   │
-│ | | | | | | | | | | | | | | |   │
-│ +---+---+---+---+---+---+---+   │
-└─────────────────────────────────┘
++---+---+---+---+---+---+---+---+
+|S      |           |           |
++ +---+ +---+---+ + +---+---+ + +
+| |   |         | |         | | |
++ + + +---+---+ + +---+---+ + + +
+| | |         | |         | | | |
++ + +---+---+ + +---+---+ + + + +
+| |         | |         | | | | |
++ +---+---+ + +---+---+ + + + + E
+|         | |         | | | | | |
++---+---+---+---+---+---+---+---+
 ```
 
-> 📁 **[View Full Gallery](docs/gallery/)** - Complete collection of examples, comparisons, and format demonstrations
+[**📁 Full Gallery →**](docs/gallery/)
 
 ### Visual Examples
 - 🎨 **PNG Images**: High-quality maze visualizations
