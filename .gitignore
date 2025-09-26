@@ -147,8 +147,15 @@ Thumbs.db
 # Project specific
 output/
 mazes/
+demo_output/
 *.png
 *.jpg
 *.gif
 *.svg
 config.yaml
+
+# Allow gallery documentation images
+!docs/gallery/**/*.png
+!docs/gallery/**/*.jpg
+!docs/gallery/**/*.svg
+!docs/gallery/**/*.gif
