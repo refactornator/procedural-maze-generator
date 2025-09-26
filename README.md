@@ -77,6 +77,14 @@ Benchmark algorithms:
 maze-gen benchmark 20 20 --iterations 10
 ```
 
+Manage output directories:
+```bash
+maze-gen output init --directory my_mazes
+maze-gen output list --type images
+maze-gen output clean --temp-only
+maze-gen output info
+```
+
 ### Python API Usage
 
 ```python
@@ -147,6 +155,23 @@ maze-gen benchmark WIDTH HEIGHT [OPTIONS]
 
 Options:
 - `--iterations, -i`: Number of benchmark iterations
+
+#### Output Management Command
+```bash
+maze-gen output SUBCOMMAND [OPTIONS]
+```
+
+Subcommands:
+- `init`: Initialize output directory structure
+- `list`: List files in output directory
+- `clean`: Clean output directory (with confirmation)
+- `info`: Show output directory information
+
+Options:
+- `--directory, -d`: Output directory path
+- `--type, -t`: File type to list (images, ascii, svg, animations, benchmarks)
+- `--temp-only`: Clean only temporary files
+- `--max-age`: Maximum age in hours for temp files (default: 24)
 
 ### Python API
 
@@ -223,6 +248,32 @@ from maze_generator.visualization import ImageExporter
 exporter = ImageExporter(cell_size=25)
 exporter.export_png(maze, "maze.png", show_solution=True)
 exporter.export_svg(maze, "maze.svg", title="My Maze")
+```
+
+#### Output Directory Management
+
+The application includes comprehensive output directory management:
+
+```python
+from maze_generator.utils import OutputManager
+
+# Create output manager
+manager = OutputManager("my_output_dir")
+
+# Initialize directory structure
+manager.initialize_output_structure()
+
+# Get organized output paths
+path = manager.organize_by_algorithm("dfs", "maze.png", "images")
+timestamped_path = manager.get_timestamped_filename("maze", "png", "images")
+auto_path = manager.get_auto_filename("maze", "png", "images")
+
+# Clean up temporary files
+cleaned = manager.cleanup_temp_files(max_age_hours=24)
+
+# Get directory information
+usage = manager.get_disk_usage()
+file_lists = manager.list_output_files()
 ```
 
 ## Configuration
