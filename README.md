@@ -386,41 +386,14 @@ export:
 
 [**📁 Full Gallery →**](docs/gallery/)
 
-### Visual Examples
-- 🎨 **PNG Images**: High-quality maze visualizations
-- 🖼️ **SVG Vectors**: Scalable maze diagrams
-- 📊 **Algorithm Comparisons**: Side-by-side algorithm results
-- 🗂️ **Directory Organization**: Structured output management
+### Sample Commands
 
-### Sample Commands and Results
-
-**Generate organized maze collection:**
 ```bash
+# Generate organized collection
 maze-gen generate 15 12 --algorithm dfs --output-dir my_mazes --organize-by-algorithm
-maze-gen generate 15 12 --algorithm kruskal --output-dir my_mazes --organize-by-algorithm
-maze-gen generate 15 12 --algorithm prim --output-dir my_mazes --organize-by-algorithm
-```
 
-**Result directory structure:**
-```
-my_mazes/
-├── images/
-│   ├── dfs/
-│   │   └── maze_dfs.png
-│   ├── kruskal/
-│   │   └── maze_kruskal.png
-│   └── prim/
-│       └── maze_prim.png
-├── ascii/
-├── svg/
-└── temp/
-```
-
-**Solve and compare algorithms:**
-```bash
+# Solve and compare
 maze-gen solve 12 8 --gen-algorithm dfs --solve-algorithm astar --format ascii
-maze-gen solve 12 8 --gen-algorithm dfs --solve-algorithm dijkstra --format ascii
-maze-gen solve 12 8 --gen-algorithm dfs --solve-algorithm bfs --format ascii
 ```
 
 ## Examples
@@ -432,59 +405,10 @@ See the `examples/` directory for more detailed usage examples:
 - `performance_comparison.py` - Algorithm benchmarking
 - `custom_visualization.py` - Custom colors and styling
 
-## Algorithm Details
+## Algorithms
 
-### Generation Algorithms
-
-**Depth-First Search (DFS)**
-- Creates mazes with long, winding passages
-- Low branching factor
-- Fast generation
-- Good for creating challenging mazes
-
-**Kruskal's Algorithm**
-- Creates mazes with shorter passages
-- Higher branching factor
-- Uniform spanning tree approach
-- Good balance of difficulty and solvability
-
-**Prim's Algorithm**
-- Similar to Kruskal's but grows from a single point
-- Creates tree-like structures
-- Medium branching factor
-- Reliable and efficient
-
-**Wilson's Algorithm**
-- Uses loop-erased random walks
-- Creates unbiased spanning trees
-- Slower than other algorithms
-- Produces very uniform mazes
-
-### Solving Algorithms
-
-**A\* (A-Star)**
-- Optimal pathfinding with Manhattan distance heuristic
-- Fast and efficient
-- Guaranteed shortest path
-- Best general-purpose solver
-
-**Dijkstra's Algorithm**
-- Guaranteed shortest path
-- No heuristic needed
-- Slower than A* but more thorough
-- Good for analysis and verification
-
-**Breadth-First Search (BFS)**
-- Level-by-level exploration
-- Guaranteed shortest path
-- Simple implementation
-- Good for educational purposes
-
-**Depth-First Search (DFS)**
-- Deep exploration strategy
-- Not guaranteed to find shortest path
-- Fast execution
-- May find very long paths
+**Generation**: DFS, Kruskal, Prim, Wilson
+**Solving**: A*, Dijkstra, BFS, DFS, Wall Follower
 
 ## Testing
 
