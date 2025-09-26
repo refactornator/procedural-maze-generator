@@ -46,6 +46,11 @@ jobs:
       run: |
         cd demo
         python generate_samples.py || echo "Sample generation failed, continuing..."
+
+    - name: Generate gallery samples
+      run: |
+        echo "Generating permanent gallery samples..."
+        python demo/generate_gallery_samples.py || echo "Gallery generation failed, continuing..."
     
     - name: Test CLI commands used in demo
       run: |
@@ -73,6 +78,7 @@ jobs:
           demo/samples/
           demo/readme_examples/
           demo_output/
+          docs/gallery/
         retention-days: 7
 
   shell-demo-test:
