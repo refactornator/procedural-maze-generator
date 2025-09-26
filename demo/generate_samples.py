@@ -23,11 +23,17 @@ from maze_generator.algorithms.solvers import (
     BreadthFirstSearchSolver,
     DijkstraSolver,
 )
-from maze_generator.visualization import (
-    AsciiRenderer,
-    ImageExporter,
-    MatplotlibRenderer,
-)
+from maze_generator.visualization import AsciiRenderer
+
+# Optional imports for visualization
+try:
+    from maze_generator.visualization import ImageExporter, MatplotlibRenderer
+    HAS_VISUALIZATION = True
+except ImportError as e:
+    print(f"Warning: Some visualization features unavailable: {e}")
+    ImageExporter = None
+    MatplotlibRenderer = None
+    HAS_VISUALIZATION = False
 from maze_generator.utils import OutputManager
 
 
@@ -89,10 +95,14 @@ def generate_ascii_samples(samples_dir: Path):
 def generate_image_samples(samples_dir: Path):
     """Generate image samples."""
     print("Generating image samples...")
-    
+
+    if not HAS_VISUALIZATION or ImageExporter is None:
+        print("Skipping image samples - ImageExporter not available")
+        return
+
     images_dir = samples_dir / "images"
     images_dir.mkdir(exist_ok=True)
-    
+
     exporter = ImageExporter(cell_size=25, wall_width=2)
     
     algorithms = [
